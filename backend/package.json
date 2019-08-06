@@ -5,7 +5,13 @@
   "repository": "https://github.com/dicardoso/Tindev-RocketSeat.git",
   "author": "Diogo Cardoso <diogomescardoso@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
