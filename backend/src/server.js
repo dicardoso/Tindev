@@ -1,7 +1,13 @@
 const express = require('express');//importando biblioteca Express
+const mongoose = require('mongoose');
 const routes = require('./routes');
 
+
 const server = express();//cria servidor Express
+
+mongoose.connect('mongodb+srv://admin:admin@cluster0-r61bo.mongodb.net/omnistack8?retryWrites=true&w=majority',{
+   useNewUrlParser: true
+});//conecta com o BD
 
 server.use(express.json());
 server.use(routes);//adicionando rotas
