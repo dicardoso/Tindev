@@ -13,7 +13,15 @@ const DevSchema = new Schema({
    avatar:{
       type:String,
       require:true,
-   }
+   },
+   likes:[{
+      type: Schema.Types.ObjectId,//id gerado pelo github
+      ref: 'Dev'
+   }],
+   dislikes:[{
+      type: Schema.Types.ObjectId,//id gerado pelo github
+      ref: 'Dev'
+   }],
 },{
    timestamps:true
    /*Cira duas coluna na tabela  
