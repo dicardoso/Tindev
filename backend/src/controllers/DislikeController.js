@@ -16,9 +16,10 @@ module.exports = {
          return res.status(400).json({error: 'Dev não existe!'});
       }
 
-      loggedDev.dislikes.push(targetDev._id);
-
-      await loggedDev.save();
+      if(!loggedDev.dislikes.includes(targetDev._id)){//Testa se usuário já deu deslike no usuário
+         loggedDev.dislikes.push(targetDev._id);
+         await loggedDev.save();
+      }
 
       return res.json(loggedDev);
    }

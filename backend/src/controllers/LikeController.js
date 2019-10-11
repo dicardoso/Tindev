@@ -20,9 +20,10 @@ module.exports = {
          console.log('DEU MATCH!!!');
       }
 
-      loggedDev.likes.push(targetDev._id);
-
-      await loggedDev.save();
+      if(!loggedDev.likes.includes(targetDev._id)){//Testa se usuário já deu like no usuário
+         loggedDev.likes.push(targetDev._id);
+         await loggedDev.save();
+      } 
 
       return res.json(loggedDev);
    }
