@@ -1,6 +1,6 @@
 const express = require('express');//importando biblioteca Express
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
 
 const routes = require('./routes');
 
