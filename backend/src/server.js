@@ -7,7 +7,7 @@ const routes = require('./routes');
 
 const server = express();//cria servidor Express
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0-r61bo.mongodb.net/omnistack8?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://diogo:diogo@cluster0-r61bo.mongodb.net/omnistack8?retryWrites=true&w=majority',{
    useNewUrlParser: true
 });//conecta com o BD
 
