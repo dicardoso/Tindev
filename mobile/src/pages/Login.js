@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { AsyncStorage } from 'react-native';
 import { KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+
+import api from '../services/api'
 
 import logo from '../assets/logo.png';
 
-export default function Login(){
+export default function Login({ navigation }){
+    const [user, setUser] = useState('');
+    useEffect(()=>{
+        AsyncStorage.getItem('user').then(user => {
+            if(user){
+                navigation.navigate('Main', { user })
+            }
+        })
+    }, []);
+
+    async function handleLogin(){
+        const response = await api.post('/devs', {username: user});
+
+        const { _id } = response.data;
+
+        await AsyncStorage.setItem('user', _id);
+
+        navigation.navigate('Main', { _id });
+        
+    }
+
     return (
         <KeyboardAvoidingView 
             behavior="padding"
@@ -17,10 +40,15 @@ export default function Login(){
                 placeholder="Digite seu usuário no Github"
                 placeholderTextColor="#999"
                 style={styles.input}
+                value={user}
+                onChangeText={setUser}
             >
             </TextInput>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={handleLogin}
+            >
                 <Text style={styles.buttonText}>Enviar</Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>
