@@ -3,8 +3,7 @@
  */
 const Dev = require('../models/Dev');
 module.exports = {
-   async store(req,res){//criando um novo Like
-      
+   async store(req,res){//criando um novo Like 
       const { user } = req.headers;//usuário logado
       const { devId } = req.params;//usuário alvo do like
 
