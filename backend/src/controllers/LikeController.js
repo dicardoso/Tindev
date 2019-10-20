@@ -4,7 +4,6 @@
 const Dev = require('../models/Dev');
 module.exports = {
    async store(req,res){//criando um novo Like
-      console.log(req.io, req.connectedUsers);
       
       const { user } = req.headers;//usuário logado
       const { devId } = req.params;//usuário alvo do like
