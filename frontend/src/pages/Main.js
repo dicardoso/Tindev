@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { Link } from 'react-router-dom';
 
 import logo from '../assets/logo.svg';
@@ -12,7 +13,7 @@ import './Main.css';
 export default function Main({match}){//match possui todos os parâmetros passados para essa rota
     const [users, setUsers] = useState([]);
     
-    useEffect(()=> {
+    useEffect(()=> {//faz chamada a api
         async function loadUsers(){
             const response = await api.get('/devs', {
                 headers:{
@@ -23,6 +24,16 @@ export default function Main({match}){//match possui todos os parâmetros passad
         }
 
         loadUsers();
+    },[match.params.id]);
+
+    useEffect(()=> {//conectar com webSocket
+        const socket = io('http://localhost:5555', {
+            query: { user: match.params.id }
+        });
+
+        socket.on('match', dev => {
+            console.log(dev);
+        })
     },[match.params.id]);
 
     async function handleLike(id){

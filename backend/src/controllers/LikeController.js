@@ -4,6 +4,7 @@
 const Dev = require('../models/Dev');
 module.exports = {
    async store(req,res){//criando um novo Like
+      console.log(req.io, req.connectedUsers);
       
       const { user } = req.headers;//usuário logado
       const { devId } = req.params;//usuário alvo do like
@@ -17,7 +18,16 @@ module.exports = {
       }
 
       if (targetDev.likes.includes(loggedDev._id)){//Testa se o target já deu Like no logged
-         console.log('DEU MATCH!!!');
+         const loggedSocket = req.connectedUsers[loggedDev._id];
+         const targetSocket = req.connectedUsers[targetDev._id];
+
+         if(loggedSocket){
+            req.io.to(loggedSocket).emit('match', targetDev);//emitindo mensagem
+         }
+
+         if(targetSocket){
+            req.io.to(targetSocket).emit('match', loggedDev);//emitindo mensagem
+         }
       }
 
       if(!loggedDev.likes.includes(targetDev._id)){//Testa se usuário já deu like no usuário
