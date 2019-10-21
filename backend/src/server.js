@@ -24,7 +24,7 @@ mongoose.connect('mongodb+srv://diogo:diogo@cluster0-r61bo.mongodb.net/omnistack
 app.use((req,res,next) => {
    req.io = io;
    req.connectedUsers = connectedUsers;
-
+   
    return next();
 });
 

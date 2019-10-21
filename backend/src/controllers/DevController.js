@@ -16,7 +16,7 @@ module.exports = {
       const {user} = req.headers;
 
       const loggedDev = await Dev.findById(user);
-
+      
       //listar usuarios que não receberam like ou dislike nem é o logado
       const users = await Dev.find({//aplicando filtro 
          //$and:[] aplica o AND a todos dentro do []
